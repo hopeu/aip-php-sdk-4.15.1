@@ -146,8 +146,7 @@ class AipBase {
 
             $headers = $this->getAuthHeaders('POST', $url, $params, $headers);
             $response = $this->client->post($url, $data, $params, $headers);
-
-            $obj = $this->proccessResult($response['content']);
+            $obj = json_decode($response['content'], true);
 
             if(!$this->isCloudUser && isset($obj['error_code']) && $obj['error_code'] == 110){
                 $authObj = $this->auth(true);
